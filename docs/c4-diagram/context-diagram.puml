@@ -1,0 +1,11 @@
+@startuml C4_Context
+!include <C4/C4_Context>
+
+title Diagrama de Contexto - TrecoShop
+
+Person(Partners, "Parceiros da empresa", "Fornecedores que interagem com a plataforma")
+System(TrecoShop, "TrecoShop", "Plataforma de e-commerce")
+
+Rel(Partners, TrecoShop, "Acesso a dados de Cliente, Produto e Pedido")
+
+@enduml

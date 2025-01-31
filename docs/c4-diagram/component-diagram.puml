@@ -1,0 +1,43 @@
+@startuml C4_Component
+!include <C4/C4_Component>
+
+title Diagrama de Components - TrecoShop
+
+
+Person(Partners, "Parceiros da empresa", "Fornecedores que interagem com a plataforma")
+
+System_Boundary(TrecoShop, "TrecoShop") {
+  Container(API, "API MVC", "Express - NodeJS", "Backend principal do TrecoShop")
+  ContainerDb(Database, "Database", "Postgres")
+
+  Component(OrderController, "OrderController", "Controllers", "Recebe requisições HTTP para módulo de pedidos")
+  Component(OrderService, "OrderService", "Services", "Contém a lógica de negócios para módulo de pedidos")
+  Component(OrderRepository, "OrderRepository", "Repositories", "Interagem com o banco de dados de pedidos")
+
+  Component(ProductController, "ProductController", "Controllers", "Recebe requisições HTTP para módulo de produtos")
+  Component(ProductService, "ProductService", "Services", "Contém a lógica de negócios para módulo de produtos")
+  Component(ProductRepository, "ProductRepository", "Repositories", "Interagem com o banco de dados de produtos")
+
+  Component(CustomerController, "CustomerController", "Controllers", "Recebe requisições HTTP para módulo de clientes")
+  Component(CustomerService, "CustomerService", "Services", "Contém a lógica de negócios para módulo de clientes")
+  Component(CustomerRepository, "CustomerRepository", "Repositories", "Interagem com o banco de dados de clientes")
+}
+
+Rel(Partners, API, "Acesso a dados de Cliente, Produto e Pedido")
+
+Rel(API, OrderController, "")
+Rel(OrderController, OrderService, "")
+Rel(OrderService, OrderRepository, "")
+Rel(OrderRepository, Database, "")
+
+Rel(API, ProductController, "")
+Rel(ProductController, ProductService, "")
+Rel(ProductService, ProductRepository, "")
+Rel(ProductRepository, Database, "")
+
+Rel(API, CustomerController, "")
+Rel(CustomerController, CustomerService, "")
+Rel(CustomerService, CustomerRepository, "")
+Rel(CustomerRepository, Database, "")
+
+@enduml

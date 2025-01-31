@@ -1,0 +1,17 @@
+@startuml C4_Container
+!include <C4/C4_Container>
+
+title Diagrama de Containers - TrecoShop
+
+
+Person(Partners, "Parceiros da empresa", "Fornecedores que interagem com a plataforma")
+
+System_Boundary(TrecoShop, "TrecoShop") {
+  Container(API, "API MVC", "Express - NodeJS", "Responsável pelo backend")
+  ContainerDb(DB, "Banco de Dados", "PostgreSQL", "Armazena os dados da plataforma")
+}
+
+Rel_R(Partners, API, "Acesso a dados de Cliente, Produto e Pedido")
+Rel_R(API, DB, "Consulta/Gravação")
+
+@enduml
