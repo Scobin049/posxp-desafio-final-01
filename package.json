@@ -1,0 +1,21 @@
+{
+  "name": "desafio-final-01",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.1",
+    "typeorm": "^0.3.20",
+    "uuid": "^11.0.5"
+  }
+}
