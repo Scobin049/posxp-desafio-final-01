@@ -1,21 +1,27 @@
 {
-  "name": "desafio-final-01",
+  "name": "posxp-desafio-final-01",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "docker:compose": "docker-compose -f docker-compose.yml up -d",
+    "dev": "npm run docker:compose && nodemon src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "pg": "^8.13.1",
     "typeorm": "^0.3.20",
     "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }
