@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  df01-postgres:
+    image: postgres:15.3-alpine
+    container_name: df01-postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+  df01-pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: df01-pgadmin
+    restart: always
+    depends_on:
+      - df01-postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@localhost.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - 8080:80
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
+
+
