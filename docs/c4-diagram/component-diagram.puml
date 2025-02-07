@@ -4,40 +4,42 @@
 title Diagrama de Components - TrecoShop
 
 
-Person(Partners, "Parceiros da empresa", "Fornecedores que interagem com a plataforma")
+Person_Ext(Partners, "Parceiros da empresa", "Fornecedores que interagem com a plataforma")
 
 System_Boundary(TrecoShop, "TrecoShop") {
-  Container(API, "API MVC", "Express - NodeJS", "Backend principal do TrecoShop")
+  Container(API, "TrecoShop API", "Express - NodeJS", "Backend principal do TrecoShop")
   ContainerDb(Database, "Database", "Postgres")
+  Component(AuthService, "AuthService", "Serviço de autenticação", "Responsável por autenticação e tokens JWT")
 
   Component(OrderController, "OrderController", "Controllers", "Recebe requisições HTTP para módulo de pedidos")
   Component(OrderService, "OrderService", "Services", "Contém a lógica de negócios para módulo de pedidos")
-  Component(OrderRepository, "OrderRepository", "Repositories", "Interagem com o banco de dados de pedidos")
+  Component(OrderEntity, "OrderEntity", "Repositories", "Interagem com o banco de dados de pedidos")
 
   Component(ProductController, "ProductController", "Controllers", "Recebe requisições HTTP para módulo de produtos")
   Component(ProductService, "ProductService", "Services", "Contém a lógica de negócios para módulo de produtos")
-  Component(ProductRepository, "ProductRepository", "Repositories", "Interagem com o banco de dados de produtos")
+  Component(ProductEntity, "ProductEntity", "Repositories", "Interagem com o banco de dados de produtos")
 
   Component(CustomerController, "CustomerController", "Controllers", "Recebe requisições HTTP para módulo de clientes")
   Component(CustomerService, "CustomerService", "Services", "Contém a lógica de negócios para módulo de clientes")
-  Component(CustomerRepository, "CustomerRepository", "Repositories", "Interagem com o banco de dados de clientes")
+  Component(CustomerEntity, "CustomerEntity", "Repositories", "Interagem com o banco de dados de clientes")
 }
 
-Rel(Partners, API, "Acesso a dados de Cliente, Produto e Pedido")
+Rel(Partners, API, "Consulta e atualização via API autenticada")
+Rel(API, AuthService, "Verifica autenticação e gera tokens JWT")
 
-Rel(API, OrderController, "")
-Rel(OrderController, OrderService, "")
-Rel(OrderService, OrderRepository, "")
-Rel(OrderRepository, Database, "")
+Rel(API, OrderController, "Recebe requisições HTTP de pedidos")
+Rel(OrderController, OrderService, "Chama regras de negócio para pedidos")
+Rel(OrderService, OrderEntity, "Acessa dados de pedidos")
+Rel(OrderEntity, Database, "Executa operações no banco de dados")
 
-Rel(API, ProductController, "")
-Rel(ProductController, ProductService, "")
-Rel(ProductService, ProductRepository, "")
-Rel(ProductRepository, Database, "")
+Rel(API, ProductController, "Recebe requisições HTTP de produtos")
+Rel(ProductController, ProductService, "Chama regras de negócio para produtos")
+Rel(ProductService, ProductEntity, "Acessa dados de produtos")
+Rel(ProductEntity, Database, "Executa operações no banco de dados")
 
-Rel(API, CustomerController, "")
-Rel(CustomerController, CustomerService, "")
-Rel(CustomerService, CustomerRepository, "")
-Rel(CustomerRepository, Database, "")
+Rel(API, CustomerController, "Recebe requisições HTTP de clientes")
+Rel(CustomerController, CustomerService, "Chama regras de negócio para clientes")
+Rel(CustomerService, CustomerEntity, "Acessa dados de clientes")
+Rel(CustomerEntity, Database, "Executa operações no banco de dados")
 
 @enduml

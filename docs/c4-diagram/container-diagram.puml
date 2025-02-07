@@ -4,7 +4,7 @@
 title Diagrama de Containers - TrecoShop
 
 
-Person(Partners, "Parceiros da empresa", "Fornecedores que interagem com a plataforma")
+Person_Ext(Partners, "Parceiros da empresa", "Fornecedores que interagem com a plataforma")
 
 System_Boundary(TrecoShop, "TrecoShop") {
   Container(API, "API MVC", "Express - NodeJS", "Responsável pelo backend")
